@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.evitected.speechcamera.MainActivity">
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvSpeechText"
+            android:textSize="25sp"
+            android:text="Hello!"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/ivCamera"
+            android:layout_margin="10dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+        <ImageView
+            android:id="@+id/ivMicrophone"
+            android:src="@drawable/microphone"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+        <TextView
+            android:textSize="18sp"
+            android:text="Tap mic to speak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
