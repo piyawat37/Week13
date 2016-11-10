@@ -9,6 +9,8 @@ import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bindWidget();
         speech();
+        eventTap();
+    }
+
+    private void eventTap() {
+        ivMicrophone.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                speech();
+                return false;
+            }
+        });
     }
 
     private void bindWidget() {
@@ -57,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     tvSpeechText.setText(result.get(0));
                     if(result.get(0).contains("open camera")){
                         openCamera();
+                    }else if(result.get(0).contains("open alarm")){
+                        openAlarm();
+                    }else if(result.get(0).contains("open phone")){
+                        openDial();
                     }
                 }
             case 2:
@@ -69,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(i, 2);
     }
+    public void openAlarm(){
+        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+        startActivity(i);
+    }
+
+
+
+    //Create Alarm Fix by Voice
     public void createAlarm(String message, int hour, int minutes){
         Intent i = new Intent(AlarmClock.ACTION_SET_ALARM)
                 .putExtra(AlarmClock.EXTRA_MESSAGE, message)
@@ -78,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
     }
+    public void openDial(){
+        Intent i = new Intent(Intent.ACTION_DIAL);
+        startActivity(i);
+
+    }
+
+    //Calling Phonenumber fix by voice
     public void dialPhoneNumber(String phoneNumber){
         Intent i = new Intent(Intent.ACTION_DIAL);
         i.setData(Uri.parse("tel: "+ phoneNumber));
