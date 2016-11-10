@@ -69,11 +69,23 @@ public class MainActivity extends AppCompatActivity {
                     result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     tvSpeechText.setText(result.get(0));
                     if(result.get(0).contains("open camera")){
-                        openCamera();
+                        try{
+                            openCamera();
+                        }catch (Exception e){
+                            Toast.makeText(MainActivity.this, "Camera is not supported.", Toast.LENGTH_SHORT).show();
+                        }
                     }else if(result.get(0).contains("open alarm")){
-                        openAlarm();
+                        try{
+                            openAlarm();
+                        }catch (Exception e){
+                            Toast.makeText(MainActivity.this, "Alarm is not supported.", Toast.LENGTH_SHORT).show();
+                        }
                     }else if(result.get(0).contains("open phone")){
-                        openDial();
+                        try{
+                            openPhone();
+                        }catch (Exception e){
+                            Toast.makeText(MainActivity.this, "Phone is not supported.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             case 2:
@@ -103,10 +115,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
     }
-    public void openDial(){
+    public void openPhone(){
         Intent i = new Intent(Intent.ACTION_DIAL);
         startActivity(i);
-
     }
 
     //Calling Phonenumber fix by voice
